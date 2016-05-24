@@ -7,8 +7,11 @@
 
 #' Validates whether a given url exists
 #'
-#' @param url
+#' @param url Submission URL
 #' @return A boolean value indicating whether url exists
+#' @export
+#' @keywords internal
+#' @importFrom httr http_error
 #' @examples
 #' validate_url('http://graple.acis.ufl.edu')
 validate_url <- function(url){
@@ -26,8 +29,12 @@ validate_url <- function(url){
 #' by checking if the directories provided exist and valid
 #' @param object A Graple Object
 #' @return errors if any of the validation fails
+#' @export
+#' @keywords internal
 #' @examples
+#' \dontrun{
 #' check_graple(grapleExp1)
+#' }
 check_graple <- function(object) {
   errors <- character()
   if(length(object@GWSURL) > 0)
@@ -72,8 +79,12 @@ check_graple <- function(object) {
 #' @param object A Graple Object
 #' @return A boolean value indicating whether the directory
 #' structure is valid
+#' @export
+#' @keywords internal
 #' @examples
+#' \dontrun{
 #' check_subdirectory(grapleExp1)
+#' }
 check_subdirectory <- function(object){
   input_dir <- object@ExpRootDir
   results_dir <- object@ResultsDir
@@ -88,8 +99,12 @@ check_subdirectory <- function(object){
 #' Gets the name for results directory
 #' @param object A Graple Object
 #' @return ExpName if provided, else the JobID
+#' @export
+#' @keywords internal
 #' @examples
+#' \dontrun{
 #' getResultsDirName(grapleExp1)
+#' }
 getResultsDirName <- function(object){
   if(length(object@ExpName) > 0)
     return(object@ExpName)
@@ -100,8 +115,12 @@ getResultsDirName <- function(object){
 #' Checks if there are any files present in ExpRoot  Directory
 #' @param object A Graple Object
 #' @return A boolean value indicating whether files are present or not
+#' @export
+#' @keywords internal
 #' @examples
+#' \dontrun{
 #' filesPresent(grapleExp1)
+#' }
 filesPresent <- function(object){
   if(length(list.files(path = object@ExpRootDir, recursive = FALSE)) != length(list.dirs(path = object@ExpRootDir, recursive = FALSE)))
     return(TRUE)
@@ -113,6 +132,8 @@ filesPresent <- function(object){
 #' @param dirPath A Directory path
 #' @param fileName File name
 #' @return A boolean value indicating whether a file is present or not
+#' @export
+#' @keywords internal
 #' @examples
 #' filePresent('C:/ExpRoot/Exp1/mySim', 'met_hourly.csv')
 filePresent <- function(dirPath, fileName){
@@ -126,6 +147,9 @@ filePresent <- function(dirPath, fileName){
 #' Checks if a json file is valid according to GRAPLEr constraints
 #' @param jsonFilePath JSON File path
 #' @return A boolean value indicating whether the json file is valid
+#' @keywords internal
+#' @export
+#' @importFrom jsonlite fromJSON
 #' @examples
 #' validate_json('C:/ExpRoot/Exp3/job_desc.json')
 validate_json <- function(jsonFilePath)
@@ -201,11 +225,22 @@ validate_json <- function(jsonFilePath)
 #' @slot SecurityKey       API Security Key to authenticate a user
 #' @slot Retention         A user provided request to the GRAPLEr cluster on duration for which experiment results should be retained
 #' @slot Client_Version_ID The version of GRAPLEr package being used
+#' @importFrom methods new
+#' @exportClass Graple
 Graple <- setClass("Graple", slots = c(GWSURL = "character", ExpRootDir="character", ResultsDir="character", JobID="character",
                                        StatusCode="numeric", StatusMsg="character", ExpName="character", TempDir="character", SecurityKey="character",
                                        Retention ="numeric", Client_Version_ID="character"), prototype = list(GWSURL="http://graple.acis.ufl.edu",
                                        TempDir=tempdir(), Client_Version_ID = toString(packageVersion("GRAPLEr"))), validity = check_graple)
 
+#' Set the Temporary Directory to given directory path for the Graple Object
+#' @param grapleObject A Graple Object
+#' @param path Path to a directory to be set as Temporary directory for the experiment
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
+#' @examples
+#' \dontrun{
+#' setTempDir(grapleExp1, 'C:/TempDir')
+#' }
 setGeneric(name="setTempDir",
            def=function(grapleObject,path)
            {
@@ -213,6 +248,15 @@ setGeneric(name="setTempDir",
            }
 )
 
+#' Sets the submission URL in the Graple object
+#' @param grapleObject A Graple Object
+#' @param url A Submission URL
+#' @return The Graple object with updated submissionURL
+#' @export
+#' @examples
+#' \dontrun{
+#' setSubmissionURL(grapleExp1, 'http://graple.acis.ufl.edu')
+#' }
 setGeneric(name="setSubmissionURL",
            def=function(grapleObject,url)
            {
@@ -220,6 +264,15 @@ setGeneric(name="setSubmissionURL",
            }
 )
 
+#' Sets the name of the experiment in the Graple object
+#' @param grapleObject A Graple Object
+#' @param expName A Graple Object
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
+#' @examples
+#' \dontrun{
+#' setExpName(grapleObject, 'SweepExperiment')
+#' }
 setGeneric(name="setExpName",
            def=function(grapleObject,expName)
            {
@@ -227,6 +280,15 @@ setGeneric(name="setExpName",
            }
 )
 
+#' Set the Experiment root directory in the Graple object
+#' @param grapleObject A Graple Object
+#' @param path Directory path for the experiment root directory
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
+#' @examples
+#' \dontrun{
+#' setExperimentDir(grapleObject, 'C:/ExpRoot/Exp1')
+#' }
 setGeneric(name="setExperimentDir",
            def=function(grapleObject,path)
            {
@@ -234,6 +296,15 @@ setGeneric(name="setExperimentDir",
            }
 )
 
+#' Sets the results directory for the experiment in the Graple object
+#' @param grapleObject A Graple Object
+#' @param path Directory path for the results to be downloaded
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
+#' @examples
+#' \dontrun{
+#' setResultsDir(grapleObject, 'C:/ExpRoot/Results/Exp1')
+#' }
 setGeneric(name="setResultsDir",
            def=function(grapleObject,path)
            {
@@ -241,6 +312,15 @@ setGeneric(name="setResultsDir",
            }
 )
 
+#' Sets the security key in the grapleObject
+#' @param grapleObject A Graple Object
+#' @param path Path to the a text file containing the security key
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
+#' @examples
+#' \dontrun{
+#' setSecurityKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' }
 setGeneric(name="setSecurityKey",
            def=function(grapleObject,path)
            {
@@ -248,6 +328,15 @@ setGeneric(name="setSecurityKey",
            }
 )
 
+#' Checks if the graple service is up and running on the submission URL provided
+#' @param grapleObject A Graple Object
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleCheckService(grapleExp1)
+#' }
 setGeneric(name="GrapleCheckService",
            def=function(grapleObject)
            {
@@ -255,6 +344,17 @@ setGeneric(name="GrapleCheckService",
            }
 )
 
+#' Used to run a batch experiment with mutiple simulations in the root directory
+#' also, an optional filter can be run on the results generated
+#' @param grapleObject A Graple Object
+#' @param filterName An optional post-process filter name
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl fileUpload postForm
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleRunExperiment(grapleExp1, 'ExtractVariables')
+#' }
 setGeneric(name="GrapleRunExperiment",
            def=function(grapleObject, filterName)
            {
@@ -262,6 +362,15 @@ setGeneric(name="GrapleRunExperiment",
            }
 )
 
+#' Checks the status of an experiment
+#' @param grapleObject A Graple Object
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleCheckExperimentCompletion(grapleExp1)
+#' }
 setGeneric(name="GrapleCheckExperimentCompletion",
            def=function(grapleObject)
            {
@@ -269,6 +378,15 @@ setGeneric(name="GrapleCheckExperimentCompletion",
            }
 )
 
+#' Downloads the results to the results directory path with exp name/job id as the directory name
+#' @param grapleObject A Graple Object
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleGetExperimentResults(grapleExp1)
+#' }
 setGeneric(name="GrapleGetExperimentResults",
            def=function(grapleObject)
            {
@@ -276,6 +394,18 @@ setGeneric(name="GrapleGetExperimentResults",
            }
 )
 
+#' Used to run a sweep experiment with a json file providing job description
+#' also, an optional filter can be run on the results generated
+#' @param grapleObject A Graple Object
+#' @param filterName An optional post-process filter name
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl fileUpload postForm
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleRunSweepExperiment(grapleExp1)
+#' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
+#' }
 setGeneric(name="GrapleRunSweepExperiment",
            def=function(grapleObject, filterName)
            {
@@ -283,13 +413,15 @@ setGeneric(name="GrapleRunSweepExperiment",
            }
 )
 
-setGeneric(name="GrapleGetExperimentJobResults",
-           def=function(grapleObject)
-           {
-             standardGeneric("GrapleGetExperimentJobResults")
-           }
-)
-
+#' A method to abort an experiment
+#' @param grapleObject A Graple Object
+#' @return A text message with the status of the operation
+#' @importFrom RCurl getURL
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleEndExperiment(grapleExp1)
+#' }
 setGeneric(name="GrapleEndExperiment",
            def=function(grapleObject)
            {
@@ -297,6 +429,16 @@ setGeneric(name="GrapleEndExperiment",
            }
 )
 
+#' Checks if the GRAPLEr pacakge being used is compatible with GWS Service being used
+#' @param grapleObject A Graple Object
+#' @return A status msg indicating whether Web service and GRAPLEr are compatible
+#' and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleChkVersionCompatibility(grapleExp1)
+#' }
 setGeneric(name="GrapleChkVersionCompatibility",
            def=function(grapleObject)
            {
@@ -304,6 +446,15 @@ setGeneric(name="GrapleChkVersionCompatibility",
            }
 )
 
+#' Provides a list of post processing operations/ filters available
+#' @param grapleObject A Graple Object
+#' @return Adds the list of filters to StatusMsg and returns the Graple object
+#' @importFrom RCurl getURL
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleListPostProcessFilters(grapleExp1)
+#' }
 setGeneric(name="GrapleListPostProcessFilters",
            def=function(grapleObject)
            {
@@ -315,8 +466,11 @@ setGeneric(name="GrapleListPostProcessFilters",
 #' @param grapleObject A Graple Object
 #' @param path Path to a directory to be set as Temporary directory for the experiment
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
 #' @examples
+#' \dontrun{
 #' setTempDir(grapleExp1, 'C:/TempDir')
+#' }
 setMethod(f="setTempDir",
           signature="Graple",
           definition=function(grapleObject,path)
@@ -338,8 +492,11 @@ setMethod(f="setTempDir",
 #' @param grapleObject A Graple Object
 #' @param url A Submission URL
 #' @return The Graple object with updated submissionURL
+#' @export
 #' @examples
+#' \dontrun{
 #' setSubmissionURL(grapleExp1, 'http://graple.acis.ufl.edu')
+#' }
 setMethod(f="setSubmissionURL",
           signature="Graple",
           definition=function(grapleObject,url)
@@ -353,8 +510,11 @@ setMethod(f="setSubmissionURL",
 #' @param grapleObject A Graple Object
 #' @param expName A Graple Object
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
 #' @examples
+#' \dontrun{
 #' setExpName(grapleObject, 'SweepExperiment')
+#' }
 setMethod(f="setExpName",
           signature="Graple",
           definition=function(grapleObject,expName)
@@ -378,8 +538,11 @@ setMethod(f="setExpName",
 #' @param grapleObject A Graple Object
 #' @param path Directory path for the experiment root directory
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
 #' @examples
+#' \dontrun{
 #' setExperimentDir(grapleObject, 'C:/ExpRoot/Exp1')
+#' }
 setMethod(f="setExperimentDir",
           signature="Graple",
           definition=function(grapleObject,path)
@@ -413,8 +576,11 @@ setMethod(f="setExperimentDir",
 #' @param grapleObject A Graple Object
 #' @param path Directory path for the results to be downloaded
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
 #' @examples
+#' \dontrun{
 #' setResultsDir(grapleObject, 'C:/ExpRoot/Results/Exp1')
+#' }
 setMethod(f="setResultsDir",
           signature="Graple",
           definition=function(grapleObject,path)
@@ -447,8 +613,11 @@ setMethod(f="setResultsDir",
 #' @param grapleObject A Graple Object
 #' @param path Path to the a text file containing the security key
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
 #' @examples
+#' \dontrun{
 #' setSecurityKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' }
 setMethod(f="setSecurityKey",
           signature="Graple",
           definition=function(grapleObject,path)
@@ -475,8 +644,12 @@ setMethod(f="setSecurityKey",
 #' Checks if the graple service is up and running on the submission URL provided
 #' @param grapleObject A Graple Object
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleCheckService(grapleExp1)
+#' }
 setMethod(f="GrapleCheckService",
           signature="Graple",
           definition=function(grapleObject)
@@ -494,8 +667,12 @@ setMethod(f="GrapleCheckService",
 #' @param grapleObject A Graple Object
 #' @param filterName An optional post-process filter name
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl fileUpload postForm
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleRunExperiment(grapleExp1, 'ExtractVariables')
+#' }
 setMethod(f="GrapleRunExperiment",
           signature="Graple",
           definition=function(grapleObject, filterName)
@@ -550,10 +727,14 @@ setMethod(f="GrapleRunExperiment",
 )
 
 #' Checks the status of an experiment
-#' @param object A Graple Object
+#' @param grapleObject A Graple Object
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleCheckExperimentCompletion(grapleExp1)
+#' }
 setMethod(f="GrapleCheckExperimentCompletion",
           signature="Graple",
           definition=function(grapleObject)
@@ -569,8 +750,12 @@ setMethod(f="GrapleCheckExperimentCompletion",
 #' Downloads the results to the results directory path with exp name/job id as the directory name
 #' @param grapleObject A Graple Object
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleGetExperimentResults(grapleExp1)
+#' }
 setMethod(f="GrapleGetExperimentResults",
           signature="Graple",
           definition=function(grapleObject)
@@ -625,9 +810,13 @@ setMethod(f="GrapleGetExperimentResults",
 #' @param grapleObject A Graple Object
 #' @param filterName An optional post-process filter name
 #' @return The status message is updated on Graple object and the Graple object is returned
+#' @importFrom RCurl fileUpload postForm
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleRunSweepExperiment(grapleExp1)
 #' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
+#' }
 setMethod(f="GrapleRunSweepExperiment",
           signature="Graple",
           definition=function(grapleObject, filterName)
@@ -697,8 +886,12 @@ setMethod(f="GrapleRunSweepExperiment",
 #' A method to abort an experiment
 #' @param grapleObject A Graple Object
 #' @return A text message with the status of the operation
+#' @importFrom RCurl getURL
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleEndExperiment(grapleExp1)
+#' }
 setMethod(f="GrapleEndExperiment",
           signature="Graple",
           definition=function(grapleObject)
@@ -713,8 +906,12 @@ setMethod(f="GrapleEndExperiment",
 #' @param grapleObject A Graple Object
 #' @return A status msg indicating whether Web service and GRAPLEr are compatible
 #' and the Graple object is returned
+#' @importFrom RCurl getURL
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleChkVersionCompatibility(grapleExp1)
+#' }
 setMethod(f="GrapleChkVersionCompatibility",
           signature="Graple",
           definition=function(grapleObject)
@@ -740,8 +937,12 @@ setMethod(f="GrapleChkVersionCompatibility",
 #' Provides a list of post processing operations/ filters available
 #' @param grapleObject A Graple Object
 #' @return Adds the list of filters to StatusMsg and returns the Graple object
+#' @importFrom RCurl getURL
+#' @export
 #' @examples
+#' \dontrun{
 #' GrapleListPostProcessFilters(grapleExp1)
+#' }
 setMethod(f="GrapleListPostProcessFilters",
           signature="Graple",
           definition=function(grapleObject)
