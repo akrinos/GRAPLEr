@@ -83,6 +83,7 @@ check_graple <- function(object) {
 #' @keywords internal
 #' @examples
 #' \dontrun{
+#' grapleExp1 <- Graple(ExpRootDir="D:/GRAPLE/ExpRoot/Exp1", ResultsDir="D:/GRAPLE/Results/Exp1", TempDir = tempdir())
 #' check_subdirectory(grapleExp1)
 #' }
 check_subdirectory <- function(object){
@@ -103,6 +104,7 @@ check_subdirectory <- function(object){
 #' @keywords internal
 #' @examples
 #' \dontrun{
+#' grapleExp1 <- Graple(ExpRootDir="D:/GRAPLE/ExpRoot/Exp1", ResultsDir="D:/GRAPLE/Results/Exp1", TempDir = tempdir())
 #' getResultsDirName(grapleExp1)
 #' }
 getResultsDirName <- function(object){
@@ -119,6 +121,7 @@ getResultsDirName <- function(object){
 #' @keywords internal
 #' @examples
 #' \dontrun{
+#' grapleExp1 <- Graple(ExpRootDir="D:/GRAPLE/ExpRoot/Exp1", ResultsDir="D:/GRAPLE/Results/Exp1", TempDir = tempdir())
 #' filesPresent(grapleExp1)
 #' }
 filesPresent <- function(object){
@@ -239,7 +242,8 @@ Graple <- setClass("Graple", slots = c(GWSURL = "character", ExpRootDir="charact
 #' @export
 #' @examples
 #' \dontrun{
-#' setTempDir(grapleExp1, 'C:/TempDir')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setTempDir(grapleObject, 'C:/TempDir')
 #' }
 setGeneric(name="setTempDir",
            def=function(grapleObject,path)
@@ -255,7 +259,8 @@ setGeneric(name="setTempDir",
 #' @export
 #' @examples
 #' \dontrun{
-#' setSubmissionURL(grapleExp1, 'http://graple.acis.ufl.edu')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setSubmissionURL(grapleObject, 'http://graple.acis.ufl.edu')
 #' }
 setGeneric(name="setSubmissionURL",
            def=function(grapleObject,url)
@@ -271,6 +276,7 @@ setGeneric(name="setSubmissionURL",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setExpName(grapleObject, 'SweepExperiment')
 #' }
 setGeneric(name="setExpName",
@@ -287,6 +293,7 @@ setGeneric(name="setExpName",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setExperimentDir(grapleObject, 'C:/ExpRoot/Exp1')
 #' }
 setGeneric(name="setExperimentDir",
@@ -303,6 +310,7 @@ setGeneric(name="setExperimentDir",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setResultsDir(grapleObject, 'C:/ExpRoot/Results/Exp1')
 #' }
 setGeneric(name="setResultsDir",
@@ -319,7 +327,8 @@ setGeneric(name="setResultsDir",
 #' @export
 #' @examples
 #' \dontrun{
-#' setSecurityKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setSecurityKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
 #' }
 setGeneric(name="setSecurityKey",
            def=function(grapleObject,path)
@@ -335,7 +344,8 @@ setGeneric(name="setSecurityKey",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCheckService(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleCheckService(grapleObject)
 #' }
 setGeneric(name="GrapleCheckService",
            def=function(grapleObject)
@@ -353,7 +363,8 @@ setGeneric(name="GrapleCheckService",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleRunExperiment(grapleExp1, 'ExtractVariables')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleRunExperiment(grapleObject, 'ExtractVariables')
 #' }
 setGeneric(name="GrapleRunExperiment",
            def=function(grapleObject, filterName)
@@ -369,7 +380,8 @@ setGeneric(name="GrapleRunExperiment",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCheckExperimentCompletion(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleCheckExperimentCompletion(grapleObject)
 #' }
 setGeneric(name="GrapleCheckExperimentCompletion",
            def=function(grapleObject)
@@ -385,7 +397,8 @@ setGeneric(name="GrapleCheckExperimentCompletion",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleGetExperimentResults(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleGetExperimentResults(grapleObject)
 #' }
 setGeneric(name="GrapleGetExperimentResults",
            def=function(grapleObject)
@@ -403,8 +416,9 @@ setGeneric(name="GrapleGetExperimentResults",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleRunSweepExperiment(grapleExp1)
-#' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleRunSweepExperiment(grapleObject)
+#' GrapleRunSweepExperiment(grapleObject, 'ExtractVariables')
 #' }
 setGeneric(name="GrapleRunSweepExperiment",
            def=function(grapleObject, filterName)
@@ -420,7 +434,8 @@ setGeneric(name="GrapleRunSweepExperiment",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleEndExperiment(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleEndExperiment(grapleObject)
 #' }
 setGeneric(name="GrapleEndExperiment",
            def=function(grapleObject)
@@ -437,7 +452,8 @@ setGeneric(name="GrapleEndExperiment",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleChkVersionCompatibility(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleChkVersionCompatibility(grapleObject)
 #' }
 setGeneric(name="GrapleChkVersionCompatibility",
            def=function(grapleObject)
@@ -453,7 +469,8 @@ setGeneric(name="GrapleChkVersionCompatibility",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleListPostProcessFilters(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleListPostProcessFilters(grapleObject)
 #' }
 setGeneric(name="GrapleListPostProcessFilters",
            def=function(grapleObject)
@@ -469,7 +486,8 @@ setGeneric(name="GrapleListPostProcessFilters",
 #' @export
 #' @examples
 #' \dontrun{
-#' setTempDir(grapleExp1, 'C:/TempDir')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setTempDir(grapleObject, 'C:/TempDir')
 #' }
 setMethod(f="setTempDir",
           signature="Graple",
@@ -495,7 +513,8 @@ setMethod(f="setTempDir",
 #' @export
 #' @examples
 #' \dontrun{
-#' setSubmissionURL(grapleExp1, 'http://graple.acis.ufl.edu')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setSubmissionURL(grapleObject, 'http://graple.acis.ufl.edu')
 #' }
 setMethod(f="setSubmissionURL",
           signature="Graple",
@@ -513,6 +532,7 @@ setMethod(f="setSubmissionURL",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setExpName(grapleObject, 'SweepExperiment')
 #' }
 setMethod(f="setExpName",
@@ -541,6 +561,7 @@ setMethod(f="setExpName",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setExperimentDir(grapleObject, 'C:/ExpRoot/Exp1')
 #' }
 setMethod(f="setExperimentDir",
@@ -579,6 +600,7 @@ setMethod(f="setExperimentDir",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setResultsDir(grapleObject, 'C:/ExpRoot/Results/Exp1')
 #' }
 setMethod(f="setResultsDir",
@@ -616,7 +638,8 @@ setMethod(f="setResultsDir",
 #' @export
 #' @examples
 #' \dontrun{
-#' setSecurityKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setSecurityKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
 #' }
 setMethod(f="setSecurityKey",
           signature="Graple",
@@ -648,7 +671,8 @@ setMethod(f="setSecurityKey",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCheckService(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleCheckService(grapleObject)
 #' }
 setMethod(f="GrapleCheckService",
           signature="Graple",
@@ -671,7 +695,8 @@ setMethod(f="GrapleCheckService",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleRunExperiment(grapleExp1, 'ExtractVariables')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleRunExperiment(grapleObject, 'ExtractVariables')
 #' }
 setMethod(f="GrapleRunExperiment",
           signature="Graple",
@@ -733,7 +758,8 @@ setMethod(f="GrapleRunExperiment",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCheckExperimentCompletion(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleCheckExperimentCompletion(grapleObject)
 #' }
 setMethod(f="GrapleCheckExperimentCompletion",
           signature="Graple",
@@ -754,7 +780,8 @@ setMethod(f="GrapleCheckExperimentCompletion",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleGetExperimentResults(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleGetExperimentResults(grapleObject)
 #' }
 setMethod(f="GrapleGetExperimentResults",
           signature="Graple",
@@ -814,8 +841,9 @@ setMethod(f="GrapleGetExperimentResults",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleRunSweepExperiment(grapleExp1)
-#' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleRunSweepExperiment(grapleObject)
+#' GrapleRunSweepExperiment(grapleObject, 'ExtractVariables')
 #' }
 setMethod(f="GrapleRunSweepExperiment",
           signature="Graple",
@@ -910,7 +938,8 @@ setMethod(f="GrapleEndExperiment",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleChkVersionCompatibility(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleChkVersionCompatibility(grapleObject)
 #' }
 setMethod(f="GrapleChkVersionCompatibility",
           signature="Graple",
@@ -941,7 +970,8 @@ setMethod(f="GrapleChkVersionCompatibility",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleListPostProcessFilters(grapleExp1)
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleListPostProcessFilters(grapleObject)
 #' }
 setMethod(f="GrapleListPostProcessFilters",
           signature="Graple",
