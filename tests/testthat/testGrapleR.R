@@ -1,8 +1,5 @@
-# library(httr)
-# library(RCurl)
-# library(jsonlite)
 library(GRAPLEr)
-context("GRAPLEr")
+context("GRAPLEr service testing")
 
 graple <- Graple()
 graple <- GrapleCheckService(graple)
@@ -11,6 +8,11 @@ test_that("Graple service is available and returns success message", {
 })
 
 graple <- GrapleListPostProcessFilters(graple)
+test_that("Graple service is available and returns success message", {
+  expect_match(graple@StatusMsg, 'The list of post process filters available are :')
+})
+
+graple <- GrapleChkVersionCompatibility(graple)
 test_that("Graple service is available and returns success message", {
   expect_match(graple@StatusMsg, 'The list of post process filters available are :')
 })
