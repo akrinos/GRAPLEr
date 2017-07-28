@@ -245,8 +245,8 @@ validate_json <- function(jsonFilePath)
 #' @importFrom methods new
 #' @exportClass Graple
 Graple <- setClass("Graple", slots = c(GWSURL = "character", ExpRootDir="character", ResultsDir="character", JobID="character", Email="character",
-                                       APIKey="character", SimsPerJob="numeric", StatusCode="numeric", StatusMsg="character", ExpName="character", TempDir="character", 
-                                       Retention ="numeric", Client_Version_ID="character"), prototype = list(GWSURL="https://graple.acis.ufl.edu", Email='', APIKey="0",
+                                       APIKey="character", classKey="character", SimsPerJob="numeric", StatusCode="numeric", StatusMsg="character", ExpName="character", TempDir="character", 
+                                       Retention ="numeric", Client_Version_ID="character"), prototype = list(GWSURL="https://graple.acis.ufl.edu", Email='', APIKey="0", classKey="0",
                                                                                                               SimsPerJob=5, TempDir=tempdir(), Retention = 10, Client_Version_ID = toString(packageVersion("GRAPLEr"))), validity = check_graple)
 
 #' Set the Temporary Directory to given directory path for the Graple Object
