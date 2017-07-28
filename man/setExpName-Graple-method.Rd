@@ -24,4 +24,3 @@ grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDir
 setExpName(grapleObject, 'SweepExperiment')
 }
 }
-

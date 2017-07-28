@@ -4,12 +4,14 @@
 \alias{setAPIKey}
 \title{Sets the API key in the grapleObject}
 \usage{
-setAPIKey(grapleObject, path)
+setAPIKey(grapleObject, APIKey, path)
 }
 \arguments{
 \item{grapleObject}{A Graple Object}
 
-\item{path}{Path to the a text file containing the security key}
+\item{APIKey}{a string API key}
+
+\item{path}{Path to the a text file containing the API key}
 }
 \value{
 The status message is updated on Graple object and the Graple object is returned
@@ -20,7 +22,7 @@ Sets the API key in the grapleObject
 \examples{
 \dontrun{
 grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
+setAPIKey(grapleExp1,'APIKey', 'path')
+setAPIKey(grapleExp1,'APIKey')
 }
 }
-

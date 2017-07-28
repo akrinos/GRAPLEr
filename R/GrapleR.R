@@ -37,13 +37,13 @@ check_graple <- function(object) {
   if(length(object@GWSURL) > 0)
   {
     valid_url <- validate_url(object@GWSURL)
-    
+
     if (!valid_url) {
       msg <- paste("Invalid url")
       errors <- c(errors, msg)
     }
   }
-  
+
   if(length(object@ExpRootDir) > 0)
   {
     if(!dir.exists(object@ExpRootDir))
@@ -52,7 +52,7 @@ check_graple <- function(object) {
       errors <- c(errors, msg)
     }
   }
-  
+
   if(length(object@ResultsDir) > 0)
   {
     if(!dir.exists(object@ResultsDir))
@@ -61,7 +61,7 @@ check_graple <- function(object) {
       errors <- c(errors, msg)
     }
   }
-  
+
   if(length(object@classKey) == 0)
   {
     if(length(object@APIKey) == 0)
@@ -71,15 +71,15 @@ check_graple <- function(object) {
     }
   }
   else {
-    
+
   }
-  
+
   if(!check_subdirectory(object))
   {
     msg <- paste("Exp Root Dir/Result directory is a sub-directory of Result/Input")
     errors <- c(errors, msg)
   }
-  
+
   if (length(errors) == 0) TRUE else errors
 }
 
@@ -133,7 +133,7 @@ getResultsDirName <- function(object){
 #' filesPresent(grapleExp1)
 #' }
 filesPresent <- function(object){
-  if(length(list.files(path = object@ExpRootDir, recursive = FALSE, all.files = TRUE)) - 2 != length(list.dirs(path = object@ExpRootDir, recursive = FALSE))) # all.files = TRUE for Checking Hidden Files, -2 for Excluding . and .. 
+  if(length(list.files(path = object@ExpRootDir, recursive = FALSE, all.files = TRUE)) - 2 != length(list.dirs(path = object@ExpRootDir, recursive = FALSE))) # all.files = TRUE for Checking Hidden Files, -2 for Excluding . and ..
     return(TRUE)
   else
     return(FALSE)
@@ -170,19 +170,19 @@ validate_json <- function(jsonFilePath)
   valid_JSON <- TRUE
   distribution_type <- ''
   distribution_types <- list('uniform', 'binomial', 'normal', 'poisson')
-  
+
   jsonFile <- fromJSON(jsonFilePath, simplifyVector = FALSE)
-  
+
   num_iterations <- jsonFile$num_iterations
-  
+
   if(is.null(num_iterations))
     distribution_type <- 'linear'
   else
     distribution_type <- 'non-linear'
-  
+
   if(is.null(jsonFile$ExpFiles))
     return(list(valid_JSON, distribution_type))
-  
+
   if(distribution_type == 'linear')  {
     steps = 1
     for (expFile in 1:length(jsonFile$ExpFiles)) {
@@ -245,7 +245,7 @@ validate_json <- function(jsonFilePath)
 #' @importFrom methods new
 #' @exportClass Graple
 Graple <- setClass("Graple", slots = c(GWSURL = "character", ExpRootDir="character", ResultsDir="character", JobID="character", Email="character",
-                                       APIKey="character", classKey="character", SimsPerJob="numeric", StatusCode="numeric", StatusMsg="character", ExpName="character", TempDir="character", 
+                                       APIKey="character", classKey="character", SimsPerJob="numeric", StatusCode="numeric", StatusMsg="character", ExpName="character", TempDir="character",
                                        Retention ="numeric", Client_Version_ID="character"), prototype = list(GWSURL="https://graple.acis.ufl.edu", Email='', APIKey="0", classKey="0",
                                                                                                               SimsPerJob=5, TempDir=tempdir(), Retention = 10, Client_Version_ID = toString(packageVersion("GRAPLEr"))), validity = check_graple)
 
@@ -335,9 +335,9 @@ setGeneric(name="setResultsDir",
 )
 
 #' Sets a class key in an existing GRAPLE object
-#' @param grapleObject The GRAPLE object for which you want to set the class key 
+#' @param grapleObject The GRAPLE object for which you want to set the class key
 #' @param classKey A textual class key
-#' @param path A path to a class key file 
+#' @param path A path to a class key file
 #' @return The GRAPLE object with updated class key
 #' @export
 #' @examples
@@ -349,23 +349,6 @@ setGeneric(name="setClassKey",
            def=function(grapleObject,classKey,path)
            {
              standardGeneric("setClassKey")
-           }
-)
-
-#' Creates a API key key
-#' @param name The name of the person for whom the API key is to be created
-#' @param email The email address to be associated with the API key
-#' @return The API key
-#' @export
-#' @examples
-#' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' GrapleCreateAPIKey('Name', 'Email')
-#' }
-setGeneric(name="GrapleCreateAPIKey",
-           def=function(name,email)
-           {
-             standardGeneric("GrapleCreateAPIKey")
            }
 )
 
@@ -407,9 +390,9 @@ setGeneric(name="setClassKey",
            }
 )
 
-#' Retrieves the Experiment ID in order to prevent having to save the full Graple object. 
+#' Retrieves the Experiment ID in order to prevent having to save the full Graple object.
 #' @param grapleObject A Graple Object
-#' @return The Experiment ID is returned as a string and can be saved independently. 
+#' @return The Experiment ID is returned as a string and can be saved independently.
 #' @export
 #' @examples
 #' \dontrun{
@@ -423,15 +406,14 @@ setGeneric(name="getExpID",
            }
 )
 
-#' Used to create a class that can be used as a parameter of a GRAPLE object. 
-#' @param name A name for the user 
+#' Used to create an API key that can be used as a parameter of a GRAPLE object.
+#' @param name A name for the user
 #' @param email The user's email address
 #' @return The API key now associated with that user is returned, provided the email is not in use
 #' @export
 #' @examples
 #' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' GrapleCreateAPIKey('Name','Email')
+#' GrapleCreateAPIKey('Name','Email@test.com')
 #' }
 setGeneric(name="GrapleCreateAPIKey",
            def=function(name,email)
@@ -582,41 +564,22 @@ setGeneric(name="GrapleListPostProcessFilters",
            }
 )
 
-#' Creates a class key
-#' @param name The person's name
-#' @param email The person's email
-#' @return The class key 
-#' @export
-#' @examples
-#' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
-#' }
-setGeneric(name="GrapleCreateClassKey",
-           def=function(name,email)
-           {
-             standardGeneric("GrapleCreateClassKey")
-           }
-)
-
-#' Used to create a class that can be used as a parameter of a GRAPLE object. 
+#' Used to create a class that can be used as a parameter of a GRAPLE object.
 #' @param email The user's email address
 #' @param APIKey The user's APIkey
-#' @return The class key that is generated is returned 
+#' @return The class key that is generated is returned
 #' @return The status message is updated on Graple object and the Graple object is returned
 #' @export
 #' @examples
 #' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' setClassKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myClass.txt') # This would be if there was a file returned before
-#' setClassKey(grapleExp1, 'classKeyText') # This would be if there was text of the class key
+#' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
 #' }
 setGeneric(name="GrapleCreateClassKey",
            def=function(email,APIKey)
            {
              standardGeneric("GrapleCreateClassKey")
            }
-)  
+)
 
 
 #' Set the Temporary Directory to given directory path for the Graple Object
@@ -836,7 +799,7 @@ setMethod(f="GrapleRunExperiment",
               tarfile = file.path(getwd(), "sim.tar.gz")
               setwd(grapleObject@ExpRootDir)
               tar(tarfile, ".", compression="gz", compression_level = 6, tar="internal")
-              
+
               params = list()
               params['retention'] = grapleObject@Retention
               params['expname'] = getResultsDirName(grapleObject)
@@ -849,7 +812,7 @@ setMethod(f="GrapleRunExperiment",
               qurl <- paste(grapleObject@GWSURL, "GrapleRun", sep="/")
               postresp = postForm(qurl, .params = params, files=fileUpload(tarfile))
               response = fromJSON(postresp)
-              
+
               grapleObject@JobID <- ''
               grapleObject@StatusCode <- -1
               if(nchar(response$errors) > 0) {
@@ -861,12 +824,12 @@ setMethod(f="GrapleRunExperiment",
               } else {
                 grapleObject@StatusMsg <- "Unknown error"
               }
-              if(nchar(response$warnings) > 0) 
+              if(nchar(response$warnings) > 0)
                 grapleObject@StatusMsg <- paste(grapleObject@StatusMsg, "\nWARNING:", response$warnings)
-              
+
               if (file.exists(tarfile)) file.remove(tarfile)
               setwd(td)
-              
+
             }
             return (grapleObject)
           }
@@ -889,7 +852,7 @@ setMethod(f="GrapleCheckExperimentCompletion",
             qurl <- paste(grapleObject@GWSURL, "GrapleRunStatus", grapleObject@JobID, sep="/")
             grapleObject@StatusCode <- -1
             status <- fromJSON(getForm(qurl, apikey=grapleObject@APIKey))
-            
+
             if(nchar(status$errors) > 0)
               grapleObject@StatusMsg <- toString(status$errors)
             else {
@@ -1028,12 +991,12 @@ setMethod(f="GrapleRunSweepExperiment",
               params['simsperjob'] = grapleObject@SimsPerJob
               if(!missing(filterName))
                 params['filter'] = filterName
-              
+
               grapleObject@JobID <- ''
               grapleObject@StatusCode <- -1
               subresp <- postForm(qurl, .params = params, files=fileUpload(tarfile))
               response <- fromJSON(subresp)
-              
+
               if(nchar(response$errors) > 0) {
                 grapleObject@StatusMsg <- response$errors
               } else if(nchar(response$uid) == 40) {
@@ -1043,9 +1006,9 @@ setMethod(f="GrapleRunSweepExperiment",
               } else {
                 grapleObject@StatusMsg <- "Unknown error"
               }
-              if(nchar(response$warnings) > 0) 
+              if(nchar(response$warnings) > 0)
                 grapleObject@StatusMsg <- paste(grapleObject@StatusMsg, "\nWARNING:", response$warnings)
-              
+
               if (file.exists(tarfile)) file.remove(tarfile)
               setwd(td)
             }
@@ -1128,9 +1091,9 @@ setMethod(f="GrapleListPostProcessFilters",
           }
 )
 
-##### Section of Arianna's changes ##### 
-            
-#' Retrieves the experiment ID of the given GRAPLE object 
+##### Section of Arianna's changes #####
+
+#' Retrieves the experiment ID of the given GRAPLE object
 #' @param grapleObject A GRAPLE object
 #' @return The experiment ID of the present GRAPLE object is returned
 #' @export
@@ -1146,18 +1109,16 @@ setMethod(f="getExpID",
             return(grapleObject@JobID)
           }
 )
-            
-#' Used to create a class that can be used as a parameter of a GRAPLE object. 
+
+#' Used to create a class that can be used as a parameter of a GRAPLE object.
 #' @param email The user's email address
 #' @param APIKey The user's APIkey
-#' @return The class key that is generated is returned 
+#' @return The class key that is generated is returned
 #' @importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
 #' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' GrapleRunSweepExperiment(grapleExp1)
-#' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
+#' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
 #' }
 setMethod(f="GrapleCreateClassKey",
           signature="Graple",
@@ -1168,8 +1129,8 @@ setMethod(f="GrapleCreateClassKey",
           }
 )
 
-#' Sets the Class key in the grapleObject - can be done retroactively so that student can set their 
-#' class key 
+#' Sets the Class key in the grapleObject - can be done retroactively so that student can set their
+#' class key
 #' @param grapleObject A Graple Object
 #' @param path Path to the a text file containing the class key
 #' @param classKey A string class key (that would otherwise be in text file)
@@ -1209,30 +1170,30 @@ setMethod(f="setClassKey",
 
 
 ##### Creation of API Key #####
-            
-#' Used to create a class that can be used as a parameter of a GRAPLE object. 
-#' @param name A name for the user 
+
+#' Used to create a class that can be used as a parameter of a GRAPLE object.
+#' @param name A name for the user
 #' @param email The user's email address
 #' @return The API key associated with that user is returned, provided the email is not in use
 #' @importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
 #' \dontrun{
-#' 
+#' GrapleCreateAPIKey('Name', 'Email@test.com')
 #' }
 setMethod(f="GrapleCreateAPIKey",
           signature="Graple",
           definition=function(name,email)
           {
-            
+
             APIKey = "P1AC3H0LD3R"
             return (APIKey)
           }
 )
 
 
-#' Sets the Class key in the grapleObject - can be done retroactively so that student can set their 
-#' class key 
+#' Sets the Class key in the grapleObject - can be done retroactively so that student can set their
+#' class key
 #' @param grapleObject A Graple Object
 #' @param path Path to the a text file containing the API key
 #' @param APIKey A string API key (that would otherwise be in text file)

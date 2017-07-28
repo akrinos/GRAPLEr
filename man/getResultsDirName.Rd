@@ -21,4 +21,3 @@ getResultsDirName(grapleExp1)
 }
 }
 \keyword{internal}
-

@@ -27,4 +27,3 @@ GrapleRunSweepExperiment(grapleExp1)
 GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
 }
 }
-

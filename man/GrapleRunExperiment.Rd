@@ -25,4 +25,3 @@ grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDir
 GrapleRunExperiment(grapleObject, 'ExtractVariables')
 }
 }
-

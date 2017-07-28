@@ -21,4 +21,3 @@ checks if a given file exists in a directory
 filePresent('C:/ExpRoot/Exp1/mySim', 'met_hourly.csv')
 }
 \keyword{internal}
-

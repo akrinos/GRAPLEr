@@ -20,7 +20,6 @@ Sets the submission URL in the Graple object
 \examples{
 \dontrun{
 grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-setSubmissionURL(grapleObject, 'http://graple.acis.ufl.edu')
+setSubmissionURL(grapleObject, 'https://graple.acis.ufl.edu')
 }
 }
-

@@ -2,8 +2,8 @@
 % Please edit documentation in R/GrapleR.R
 \docType{class}
 \name{Graple-class}
-\alias{Graple}
 \alias{Graple-class}
+\alias{Graple}
 \title{An S4 class to represent a graple object.}
 \description{
 An S4 class to represent a graple object.
@@ -11,7 +11,7 @@ An S4 class to represent a graple object.
 \section{Slots}{
 
 \describe{
-\item{\code{GWSURL}}{A SubmissionURL for the experiment having a default value of http://graple.acis.ufl.edu}
+\item{\code{GWSURL}}{A SubmissionURL for the experiment having a default value of https://graple.acis.ufl.edu}
 
 \item{\code{ExpRootDir}}{Experiment Root Directory path}
 
@@ -22,6 +22,10 @@ An S4 class to represent a graple object.
 \item{\code{Email}}{Email address to send notifications}
 
 \item{\code{APIKey}}{API Key to authenticate a user}
+
+\item{\code{classKey}}{A class key to associate a user with a class}
+
+\item{\code{Name}}{The name of the user}
 
 \item{\code{SimsPerJob}}{A number indicating the number of simulations bundled into a worker job}
 
