@@ -1222,10 +1222,11 @@ setMethod(f="setClassKey",
 #' }
 setMethod(f="GrapleCreateAPIKey",
           signature="Graple",
-          definition=function(email,APIKey)
+          definition=function(name,email)
           {
             
-            return (grapleObject)
+            APIKey = "P1AC3H0LD3R"
+            return (APIKey)
           }
 )
 
