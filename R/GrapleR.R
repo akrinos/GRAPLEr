@@ -361,10 +361,10 @@ setGeneric(name="setAPIKey",
 #' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
 #' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
 #' }
-setGeneric(name="GrapleCreateClass",
+setGeneric(name="GrapleCreateClassKey",
            def=function(name,email)
            {
-             standardGeneric("GrapleCreateClass")
+             standardGeneric("GrapleCreateClassKey")
            }
 )
 
@@ -1111,6 +1111,25 @@ setMethod(f="GrapleListPostProcessFilters",
 #' @param email The user's email address
 #' @param APIKey The user's APIkey
 #' @return The class key that is generated is returned 
+#' @return The status message is updated on Graple object and the Graple object is returned
+#' @export
+#' @examples
+#' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setClassKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myClass.txt') # This would be if there was a file returned before
+#' setClassKey(grapleExp1, 'classKeyText') # This would be if there was text of the class key
+#' }
+setGeneric(name="GrapleCreateClassKey",
+           def=function(email,APIKey)
+           {
+             standardGeneric("GrapleCreateClassKey")
+           }
+)       
+            
+#' Used to create a class that can be used as a parameter of a GRAPLE object. 
+#' @param email The user's email address
+#' @param APIKey The user's APIkey
+#' @return The class key that is generated is returned 
 #' @importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
@@ -1119,12 +1138,12 @@ setMethod(f="GrapleListPostProcessFilters",
 #' GrapleRunSweepExperiment(grapleExp1)
 #' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
 #' }
-setMethod(f="GrapleCreateClass",
+setMethod(f="GrapleCreateClassKey",
           signature="Graple",
           definition=function(email,APIKey)
           {
-            
-            return (grapleObject)
+            classKey = 22222 # not functional right now just a placeholder
+            return (classKey)
           }
 )
 
@@ -1188,6 +1207,21 @@ setMethod(f="setClassKey",
 
 
 ##### Creation of API Key #####
+#' Used to create a class that can be used as a parameter of a GRAPLE object. 
+#' @param name A name for the user 
+#' @param email The user's email address
+#' @return The API key associated with that user is returned, provided the email is not in use
+#' @export
+#' @examples
+#' \dontrun{
+#' }
+setGeneric(name="GrapleCreateAPIKey",
+           def=function(email,APIKey)
+           {
+             standardGeneric("GrapleCreateAPIKey")
+           }
+)
+            
 #' Used to create a class that can be used as a parameter of a GRAPLE object. 
 #' @param name A name for the user 
 #' @param email The user's email address
