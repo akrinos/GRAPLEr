@@ -351,6 +351,77 @@ setGeneric(name="setAPIKey",
            }
 )
 
+#' Creates a class key
+#' @param name The person's name
+#' @param email The person's email
+#' @return The class key 
+#' @export
+#' @examples
+#' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' }
+setGeneric(name="GrapleCreateClass",
+           def=function(name,email)
+           {
+             standardGeneric("GrapleCreateClass")
+           }
+)
+
+#' Sets a class key in an existing GRAPLE object
+#' @param grapleObject The GRAPLE object for which you want to set the class key 
+#' @param classKey A textual class key
+#' @param path A path to a class key file 
+#' @return The GRAPLE object with updated class key
+#' @export
+#' @examples
+#' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' }
+setGeneric(name="setClassKey",
+           def=function(grapleObject,classKey,path)
+           {
+             standardGeneric("setClassKey")
+           }
+)
+
+#' Creates a class key
+#' @param name The name of the person for whom the API key is to be created
+#' @param email The email address to be associated with the API key
+#' @return The API key
+#' @export
+#' @examples
+#' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' }
+setGeneric(name="GrapleCreateAPIKey",
+           def=function(name,email)
+           {
+             standardGeneric("GrapleCreateAPIKey")
+           }
+)
+
+
+#' Sets an API key in an existing GRAPLE object
+#' @param grapleObject The GRAPLE object for which you want to set the API key 
+#' @param APIKey A textual API key
+#' @param path A path to an API key file 
+#' @return The GRAPLE object with updated class key
+#' @export
+#' @examples
+#' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
+#' }
+setGeneric(name="setAPIKey",
+           def=function(grapleObject,APIKey,path)
+           {
+             standardGeneric("setAPIKey")
+           }
+)
+
 #' Checks if the graple service is up and running on the submission URL provided
 #' @param grapleObject A Graple Object
 #' @return The status message is updated on Graple object and the Graple object is returned
