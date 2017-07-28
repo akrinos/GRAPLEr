@@ -1165,6 +1165,9 @@ setMethod(f="setClassKey",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' GrapleRunSweepExperiment(grapleExp1)
+#' GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
 #' }
 setGeneric(name="GrapleCreateAPIKey",
            def=function(email,APIKey)
@@ -1200,6 +1203,9 @@ setMethod(f="GrapleCreateAPIKey",
 #' @export
 #' @examples
 #' \dontrun{
+#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
+#' setAPIKey(grapleExp1,'APIKey', 'path')
+#' setAPIKey(grapleExp1,'APIKey')
 #' }
 setGeneric(name="setAPIKey",
            def=function(grapleObject,APIKey,path)
@@ -1218,14 +1224,14 @@ setGeneric(name="setAPIKey",
 #' @examples
 #' \dontrun{
 #' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' setClassKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myClass.txt') # This would be if there was a file returned before
-#' setClassKey(grapleExp1, 'classKeyText') # This would be if there was text of the class key
+#' setAPIKey(grapleExp1,'APIKey', 'path')
+#' setAPIKey(grapleExp1,'APIKey')
 #' }
 setMethod(f="setAPIKey",
           signature="Graple",
           definition=function(grapleObject,APIKey,path)
           {
-            if(length(path) > 0)
+            if(!missing(path) && length(path) > 0)
             {
               if(!file.exists(path))
               {
