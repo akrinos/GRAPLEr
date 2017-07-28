@@ -334,23 +334,6 @@ setGeneric(name="setResultsDir",
            }
 )
 
-#' Sets the API key in the grapleObject
-#' @param grapleObject A Graple Object
-#' @param path Path to the a text file containing the security key
-#' @return The status message is updated on Graple object and the Graple object is returned
-#' @export
-#' @examples
-#' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
-#' }
-setGeneric(name="setAPIKey",
-           def=function(grapleObject,path)
-           {
-             standardGeneric("setAPIKey")
-           }
-)
-
 #' Creates a class key
 #' @param name The person's name
 #' @param email The person's email
@@ -710,38 +693,6 @@ setMethod(f="setResultsDir",
                 grapleObject@ResultsDir <- path
                 grapleObject@StatusCode <- 1
                 grapleObject@StatusMsg <- "Experiment root directory has been set to directory provided"
-              }
-            }
-            return(grapleObject)
-          }
-)
-
-#' Sets the API key in the grapleObject
-#' @param grapleObject A Graple Object
-#' @param path Path to the a text file containing the API key
-#' @return The status message is updated on Graple object and the Graple object is returned
-#' @export
-#' @examples
-#' \dontrun{
-#' grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-#' setAPIKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myKey.txt')
-#' }
-setMethod(f="setAPIKey",
-          signature="Graple",
-          definition=function(grapleObject,path)
-          {
-            if(length(path) > 0)
-            {
-              if(!file.exists(path))
-              {
-                grapleObject@StatusCode <- -1
-                grapleObject@StatusMsg <- "File provided does not exist"
-              }
-              else
-              {
-                grapleObject@APIKey <- readLines(path)
-                grapleObject@StatusCode <- 1
-                grapleObject@StatusMsg <- "API Key has been successfully set"
               }
             }
             return(grapleObject)
