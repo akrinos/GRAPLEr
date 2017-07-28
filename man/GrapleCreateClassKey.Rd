@@ -2,42 +2,25 @@
 % Please edit documentation in R/GrapleR.R
 \name{GrapleCreateClassKey}
 \alias{GrapleCreateClassKey}
-\alias{GrapleCreateClassKey}
-\title{Creates a class key}
+\title{Used to create a class that can be used as a parameter of a GRAPLE object.}
 \usage{
-GrapleCreateClassKey(email, APIKey)
-
 GrapleCreateClassKey(email, APIKey)
 }
 \arguments{
-\item{email}{The person's email}
+\item{email}{The user's email address}
 
 \item{APIKey}{The user's APIkey}
-
-\item{name}{The person's name}
-
-\item{email}{The user's email address}
 }
 \value{
-The class key
-
 The class key that is generated is returned
 
 The status message is updated on Graple object and the Graple object is returned
 }
 \description{
-Creates a class key
-
 Used to create a class that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-setAPIKey(grapleObject, 'C:/ExpRoot/KeyFiles/myKey.txt')
-}
-\dontrun{
-grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-setClassKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myClass.txt') # This would be if there was a file returned before
-setClassKey(grapleExp1, 'classKeyText') # This would be if there was text of the class key
+GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
 }
 }

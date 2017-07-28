@@ -20,6 +20,6 @@ Used to create a class that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-
+GrapleCreateAPIKey('Name', 'Email@test.com')
 }
 }

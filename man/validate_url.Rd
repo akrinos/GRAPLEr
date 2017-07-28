@@ -16,7 +16,6 @@ A boolean value indicating whether url exists
 Validates whether a given url exists
 }
 \examples{
-validate_url('http://graple.acis.ufl.edu')
+validate_url('https://graple.acis.ufl.edu')
 }
 \keyword{internal}
-

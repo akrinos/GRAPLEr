@@ -20,8 +20,6 @@ Used to create a class that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-GrapleRunSweepExperiment(grapleExp1)
-GrapleRunSweepExperiment(grapleExp1, 'ExtractVariables')
+GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
 }
 }

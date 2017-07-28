@@ -2,39 +2,23 @@
 % Please edit documentation in R/GrapleR.R
 \name{GrapleCreateAPIKey}
 \alias{GrapleCreateAPIKey}
-\alias{GrapleCreateAPIKey}
-\title{Creates a API key key}
+\title{Used to create an API key that can be used as a parameter of a GRAPLE object.}
 \usage{
-GrapleCreateAPIKey(name, email)
-
 GrapleCreateAPIKey(name, email)
 }
 \arguments{
-\item{name}{The name of the person for whom the API key is to be created}
-
-\item{email}{The email address to be associated with the API key}
-
 \item{name}{A name for the user}
 
 \item{email}{The user's email address}
 }
 \value{
-The API key
-
 The API key now associated with that user is returned, provided the email is not in use
 }
 \description{
-Creates a API key key
-
-Used to create a class that can be used as a parameter of a GRAPLE object.
+Used to create an API key that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-GrapleCreateAPIKey('Name', 'Email')
-}
-\dontrun{
-grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-GrapleCreateAPIKey('Name','Email')
+GrapleCreateAPIKey('Name','Email@test.com')
 }
 }

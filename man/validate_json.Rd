@@ -17,8 +17,7 @@ Checks if a json file is valid according to GRAPLEr constraints
 }
 \examples{
 \dontrun{
-validate_json(filename)
+validate_json('C:/ExpRoot/Exp3/job_desc.json')
 }
 }
 \keyword{internal}
-

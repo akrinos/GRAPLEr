@@ -3,7 +3,7 @@
 \docType{methods}
 \name{setAPIKey,Graple-method}
 \alias{setAPIKey,Graple-method}
-\title{Sets the Class key in the grapleObject - can be done retroactively so that student can set their 
+\title{Sets the Class key in the grapleObject - can be done retroactively so that student can set their
 class key}
 \usage{
 \S4method{setAPIKey}{Graple}(grapleObject, APIKey, path)
@@ -19,7 +19,7 @@ class key}
 The status message is updated on Graple object and the Graple object is returned
 }
 \description{
-Sets the Class key in the grapleObject - can be done retroactively so that student can set their 
+Sets the Class key in the grapleObject - can be done retroactively so that student can set their
 class key
 }
 \examples{
