@@ -409,14 +409,15 @@ setGeneric(name="getExpID",
 #' Used to create an API key that can be used as a parameter of a GRAPLE object.
 #' @param name A name for the user
 #' @param email The user's email address
+#' @param url The GWS url
 #' @return The API key now associated with that user is returned, provided the email is not in use
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCreateAPIKey('Name','Email@test.com')
+#' GrapleCreateAPIKey('Name','Email@test.com', 'GWS Url')
 #' }
 setGeneric(name="GrapleCreateAPIKey",
-           def=function(name,email)
+           def=function(name,email,url)
            {
              standardGeneric("GrapleCreateAPIKey")
            }
@@ -567,15 +568,16 @@ setGeneric(name="GrapleListPostProcessFilters",
 #' Used to create a class that can be used as a parameter of a GRAPLE object.
 #' @param email The user's email address
 #' @param APIKey The user's APIkey
+#' @param url The GWS url
 #' @return The class key that is generated is returned
 #' @return The status message is updated on Graple object and the Graple object is returned
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
+#' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3', 'GWS url')
 #' }
 setGeneric(name="GrapleCreateClassKey",
-           def=function(email,APIKey)
+           def=function(email,APIKey, url)
            {
              standardGeneric("GrapleCreateClassKey")
            }
@@ -1109,21 +1111,22 @@ setMethod(f="getExpID",
 #' Used to create a class that can be used as a parameter of a GRAPLE object.
 #' @param email The user's email address
 #' @param APIKey The user's APIkey
+#' @param url The GWS url
 #' @return The class key that is generated is returned
 #' @importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
+#' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3', 'GWS url')
 #' }
 setMethod(f="GrapleCreateClassKey",
           signature="character",
-          definition=function(email,APIKey)
+          definition=function(email,APIKey,url)
           {
             params = list()
             params['email'] = email
             params['APIKey'] = APIKey
-            qurl <- paste(grapleObject@GWSURL, "CreateClassKey", sep="/") # fix later
+            qurl <- paste(url, "CreateClass", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
             classKey = response@classKey
             return (classKey)
@@ -1173,21 +1176,22 @@ setMethod(f="setClassKey",
 #' Used to create a class that can be used as a parameter of a GRAPLE object.
 #' @param name A name for the user
 #' @param email The user's email address
+#' @param url The GWS url
 #' @return The API key associated with that user is returned, provided the email is not in use
 #' #@importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleCreateAPIKey('Name', 'Email@test.com')
+#' GrapleCreateAPIKey('Name', 'Email@test.com', 'GWS url')
 #' }
 setMethod(f="GrapleCreateAPIKey",
           signature="character",
-          definition=function(name,email)
+          definition=function(name,email,url)
           {
             params = list()
             params['username'] = name
             params['email'] = email
-            qurl <- paste(grapleObject@GWSURL, "GrapleAddUser", sep="/") # fix later
+            qurl <- paste(url, "GrapleAddUser", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
             offering = fromJSON(response)
             APIKey = offering@APIKey

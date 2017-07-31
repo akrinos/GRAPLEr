@@ -5,12 +5,14 @@
 \alias{GrapleCreateAPIKey,character-method}
 \title{Used to create a class that can be used as a parameter of a GRAPLE object.}
 \usage{
-\S4method{GrapleCreateAPIKey}{character}(name, email)
+\S4method{GrapleCreateAPIKey}{character}(name, email, url)
 }
 \arguments{
 \item{name}{A name for the user}
 
 \item{email}{The user's email address}
+
+\item{url}{The GWS url}
 }
 \value{
 The API key associated with that user is returned, provided the email is not in use
@@ -21,6 +23,6 @@ Used to create a class that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-GrapleCreateAPIKey('Name', 'Email@test.com')
+GrapleCreateAPIKey('Name', 'Email@test.com', 'GWS url')
 }
 }

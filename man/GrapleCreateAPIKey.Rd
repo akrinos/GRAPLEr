@@ -4,12 +4,14 @@
 \alias{GrapleCreateAPIKey}
 \title{Used to create an API key that can be used as a parameter of a GRAPLE object.}
 \usage{
-GrapleCreateAPIKey(name, email)
+GrapleCreateAPIKey(name, email, url)
 }
 \arguments{
 \item{name}{A name for the user}
 
 \item{email}{The user's email address}
+
+\item{url}{The GWS url}
 }
 \value{
 The API key now associated with that user is returned, provided the email is not in use
@@ -19,6 +21,6 @@ Used to create an API key that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-GrapleCreateAPIKey('Name','Email@test.com')
+GrapleCreateAPIKey('Name','Email@test.com', 'GWS Url')
 }
 }

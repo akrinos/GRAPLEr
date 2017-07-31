@@ -4,12 +4,14 @@
 \alias{GrapleCreateClassKey}
 \title{Used to create a class that can be used as a parameter of a GRAPLE object.}
 \usage{
-GrapleCreateClassKey(email, APIKey)
+GrapleCreateClassKey(email, APIKey, url)
 }
 \arguments{
 \item{email}{The user's email address}
 
 \item{APIKey}{The user's APIkey}
+
+\item{url}{The GWS url}
 }
 \value{
 The class key that is generated is returned
@@ -21,6 +23,6 @@ Used to create a class that can be used as a parameter of a GRAPLE object.
 }
 \examples{
 \dontrun{
-GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
+GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3', 'GWS url')
 }
 }
