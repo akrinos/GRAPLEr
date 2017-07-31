@@ -1126,7 +1126,7 @@ setMethod(f="GrapleCreateClassKey",
             params = list()
             params['email'] = email
             params['apikey'] = APIKey
-            qurl <- paste(url, "CreateClass", sep="/") # fix later
+            qurl <- paste(url, "GrapleCreateClass", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
             if (length(response['errors']) == 0) {
               classKey = response['classid']
