@@ -1125,10 +1125,14 @@ setMethod(f="GrapleCreateClassKey",
           {
             params = list()
             params['email'] = email
-            params['APIKey'] = APIKey
+            params['apikey'] = APIKey
             qurl <- paste(url, "CreateClass", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
-            classKey = response@classKey
+            if (length(response['errors']) == 0) {
+              classKey = response['classid']
+            } else {
+              classKey = response['errors']
+            }
             return (classKey)
           }
 )
@@ -1194,7 +1198,12 @@ setMethod(f="GrapleCreateAPIKey",
             qurl <- paste(url, "GrapleAddUser", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
             offering = fromJSON(response)
-            APIKey = offering@APIKey
+            print(offering)
+            if (length(offering['errors']) == 0){
+              APIKey = offering['apikey'] #offering@APIKey
+            } else {
+              APIKey = offering['errors']
+            }
             return (APIKey)
           }
 )
