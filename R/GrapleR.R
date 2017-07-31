@@ -985,9 +985,7 @@ setMethod(f="GrapleRunSweepExperiment",
               params['expname'] = getResultsDirName(grapleObject)
               params['email'] = grapleObject@Email
               params['apikey'] = grapleObject@APIKey
-              if (!missing(classKey)) {
-                params['classkey'] = grapleObject@classKey
-              }
+              params['classkey'] = grapleObject@classKey
               params['simsperjob'] = grapleObject@SimsPerJob
               if(!missing(filterName))
                 params['filter'] = filterName
