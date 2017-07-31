@@ -14,6 +14,7 @@
 }
 \value{
 The class key that is generated is returned
+#@importFrom RCurl fileUpload postForm
 }
 \description{
 Used to create a class that can be used as a parameter of a GRAPLE object.
