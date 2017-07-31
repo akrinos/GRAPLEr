@@ -1134,6 +1134,7 @@ setMethod(f="GrapleCreateClassKey",
               classKey = response['classid']
             } else {
               classKey = response['errors']
+              print(response$errors)
             }
             return (classKey)
           }
