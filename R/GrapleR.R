@@ -413,12 +413,12 @@ setGeneric(name="getExpID",
 #' @export
 #' @examples
 #' \dontrun{
-#' createAPIKey('Name','Email@test.com')
+#' GrapleCreateAPIKey('Name','Email@test.com')
 #' }
-setGeneric(name="createAPIKey",
+setGeneric(name="GrapleCreateAPIKey",
            def=function(name,email)
            {
-             standardGeneric("createAPIKey")
+             standardGeneric("GrapleCreateAPIKey")
            }
 )
 
@@ -1119,7 +1119,7 @@ setMethod(f="getExpID",
 #' GrapleCreateClassKey('email@test.com', 'AP1K3YSAMPL3')
 #' }
 setMethod(f="GrapleCreateClassKey",
-          signature="Graple",
+          signature="character",
           definition=function(email,APIKey)
           {
             classKey = 22222 # not functional right now just a placeholder
@@ -1175,10 +1175,10 @@ setMethod(f="setClassKey",
 #' @export
 #' @examples
 #' \dontrun{
-#' createAPIKey('Name', 'Email@test.com')
+#' GrapleCreateAPIKey('Name', 'Email@test.com')
 #' }
-setMethod(f="createAPIKey",
-          signature="Graple",
+setMethod(f="GrapleCreateAPIKey",
+          signature="character",
           definition=function(name,email)
           {
             nameSet = name
