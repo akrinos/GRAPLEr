@@ -25,7 +25,7 @@ class key
 \examples{
 \dontrun{
 grapleObject <- Graple(ExpRootDir="C:/InputDirectory", ResultsDir="C:/ResultsDirectory", TempDir = tempdir())
-setClassKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myClass.txt') # This would be if there was a file returned before
 setClassKey(grapleExp1, 'classKeyText') # This would be if there was text of the class key
+setClassKey(grapleExp1, 'C:/ExpRoot/KeyFiles/myClass.txt') # This would be if there was a file returned before
 }
 }
