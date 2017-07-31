@@ -1128,13 +1128,13 @@ setMethod(f="GrapleCreateClassKey",
             params['apikey'] = APIKey
             qurl <- paste(url, "GrapleCreateClass", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
-            print(response)
-            if (length(response['errors']) == 0) {
+            offering = fromJSON(response)
+            print(offering)
+            if (length(offering['errors']) == 0) {
               print("hi")
-              classKey = response['classid']
+              classKey = offering['classid']
             } else {
-              classKey = response['errors']
-              print(response$errors)
+              classKey = offering['errors']
             }
             return (classKey)
           }
