@@ -1130,7 +1130,7 @@ setMethod(f="GrapleCreateClassKey",
             response = postForm(qurl, .params = params) # files parameter?
             offering = fromJSON(response)
             print(offering)
-            if (length(offering['errors']) == 0) {
+            if ((offering['errors']) == "") {
               print("hi")
               classKey = offering['classid']
             } else {
