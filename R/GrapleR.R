@@ -1,7 +1,7 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("GRAPLEr has been developed with support from a supplement the PRAGMA award (NSF OCI-1234983) by
-Ken Subratie, Saumitra Aditya, Satish Mahesula, Renato J. Figueiredo, Cayelan C. Carey and Paul C. Hanson.
-For more information, please visit graple.org")
+                        Ken Subratie, Saumitra Aditya, Satish Mahesula, Renato J. Figueiredo, Cayelan C. Carey and Paul C. Hanson.
+                        For more information, please visit graple.org")
 }
 
 #' Validates whether a given url exists
@@ -1128,7 +1128,9 @@ setMethod(f="GrapleCreateClassKey",
             params['apikey'] = APIKey
             qurl <- paste(url, "GrapleCreateClass", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
+            print(response)
             if (length(response['errors']) == 0) {
+              print("hi")
               classKey = response['classid']
             } else {
               classKey = response['errors']
@@ -1138,7 +1140,7 @@ setMethod(f="GrapleCreateClassKey",
 )
 
 #' Sets the Class key in the grapleObject - can be done retroactively so that student can set their
-#' class key
+#' class key/
 #' @param grapleObject A Graple Object
 #' @param path Path to the a text file containing the class key
 #' @param classKey A string class key (that would otherwise be in text file)
