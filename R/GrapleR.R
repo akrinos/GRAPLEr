@@ -1112,7 +1112,7 @@ setMethod(f="getExpID",
 #' @param email The user's email address
 #' @param APIKey The user's APIkey
 #' @return The class key that is generated is returned
-#' #@importFrom RCurl fileUpload postForm
+#' @importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
 #' \dontrun{
@@ -1122,7 +1122,12 @@ setMethod(f="GrapleCreateClassKey",
           signature="character",
           definition=function(email,APIKey)
           {
-            classKey = 22222 # not functional right now just a placeholder
+            params = list()
+            params['email'] = email
+            params['APIKey'] = APIKey
+            qurl <- paste(grapleObject@GWSURL, "CreateClassKey", sep="/") # fix later
+            response = postForm(qurl, .params = params) # files parameter?
+            classKey = response@classKey
             return (classKey)
           }
 )
@@ -1181,9 +1186,13 @@ setMethod(f="GrapleCreateAPIKey",
           signature="character",
           definition=function(name,email)
           {
-            nameSet = name
-            emailSet = email
-            APIKey = "P1AC3H0LD3R"
+            params = list()
+            params['username'] = name
+            params['email'] = email
+            qurl <- paste(grapleObject@GWSURL, "GrapleAddUser", sep="/") # fix later
+            response = postForm(qurl, .params = params) # files parameter?
+            offering = fromJSON(response)
+            APIKey = offering@APIKey
             return (APIKey)
           }
 )
