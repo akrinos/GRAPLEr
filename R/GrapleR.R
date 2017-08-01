@@ -1,7 +1,7 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("GRAPLEr has been developed with support from a supplement the PRAGMA award (NSF OCI-1234983) by
-                        Ken Subratie, Saumitra Aditya, Satish Mahesula, Renato J. Figueiredo, Cayelan C. Carey and Paul C. Hanson.
-                        For more information, please visit graple.org")
+Ken Subratie, Saumitra Aditya, Satish Mahesula, Renato J. Figueiredo, Cayelan C. Carey and Paul C. Hanson.
+For more information, please visit graple.org")
 }
 
 #' Validates whether a given url exists
@@ -583,6 +583,37 @@ setGeneric(name="GrapleCreateClassKey",
            }
 )
 
+#' Used to retrieve the experiments associated with a given API key.
+#' @param APIKey The user's APIkey
+#' @param url The GWS url
+#' @return The experiments associated with this API key
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleRetrieveExperimentsByAPIKey('AP1K3YSAMPL3', 'GWS url')
+#' }
+setGeneric(name="GrapleRetrieveExperimentsByAPIKey",
+           def=function(APIkey, url)
+           {
+             standardGeneric("GrapleRetrieveExperimentsByAPIKey")
+           }
+)
+
+#' Used to retrieve the experiments associated with a given API key.
+#' @param classKey The user's classKey
+#' @param url The GWS url
+#' @return The experiments associated with this API key
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleRetrieveExperimentsByClassKey('AP1K3YSAMPL3', 'GWS url')
+#' }
+setGeneric(name="GrapleRetrieveExperimentsByClassKey",
+           def=function(classKey, url)
+           {
+             standardGeneric("GrapleRetrieveExperimentsByClassKey")
+           }
+)
 
 #' Set the Temporary Directory to given directory path for the Graple Object
 #' @param grapleObject A Graple Object
@@ -1185,7 +1216,7 @@ setMethod(f="setClassKey",
 #' @param email The user's email address
 #' @param url The GWS url
 #' @return The API key associated with that user is returned, provided the email is not in use
-#' #@importFrom RCurl fileUpload postForm
+#' @importFrom RCurl fileUpload postForm
 #' @export
 #' @examples
 #' \dontrun{
@@ -1208,6 +1239,64 @@ setMethod(f="GrapleCreateAPIKey",
               APIKey = offering['errors']
             }
             return (APIKey)
+          }
+)
+
+#' Used to retrieve the experiments associated with a given API key.
+#' @param APIkey An API key for the user
+#' @param url The GWS url
+#' @return The experiments associated with that API key
+#' @importFrom RCurl fileUpload postForm
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleRetrieveExperimentsByAPIKey('sampleAPIKey', 'GWS url')
+#' }
+setMethod(f="GrapleRetrieveExperimentsByAPIKey",
+          signature="character",
+          definition=function(APIkey,url)
+          {
+            params = list()
+            params['apikey'] = APIkey
+            qurl <- paste(url, "GetAPIExperiments", sep="/") # fix later
+            response = postForm(qurl, .params = params) # files parameter?
+            offering = fromJSON(response)
+            print(offering)
+            if (length(offering['errors']) == 0){
+              Experiments = offering['dbdocs'] #offering@APIKey
+            } else {
+              Experiments = offering['errors']
+            }
+            return (Experiments)
+          }
+)
+
+#' Used to retrieve the experiments associated with a given class key.
+#' @param classKey The class key desired
+#' @param url The GWS url
+#' @return The experiments associated with that class key
+#' @importFrom RCurl fileUpload postForm
+#' @export
+#' @examples
+#' \dontrun{
+#' GrapleRetrieveExperimentsByClassKey('sampleClassKey', 'GWS url')
+#' }
+setMethod(f="GrapleRetrieveExperimentsByClassKey",
+          signature="character",
+          definition=function(classKey,url)
+          {
+            params = list()
+            params['classid'] = classKey
+            qurl <- paste(url, "GetClassExperiments", sep="/") # fix later
+            response = postForm(qurl, .params = params) # files parameter?
+            offering = fromJSON(response)
+            print(offering)
+            if (length(offering['errors']) == 0){
+              Experiments = offering['dbdocs'] #offering@APIKey
+            } else {
+              Experiments = offering['errors']
+            }
+            return (Experiments)
           }
 )
 

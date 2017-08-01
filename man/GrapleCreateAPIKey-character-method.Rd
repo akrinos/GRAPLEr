@@ -16,7 +16,6 @@
 }
 \value{
 The API key associated with that user is returned, provided the email is not in use
-#@importFrom RCurl fileUpload postForm
 }
 \description{
 Used to create a class that can be used as a parameter of a GRAPLE object.

@@ -4,7 +4,7 @@
 \name{setClassKey,Graple-method}
 \alias{setClassKey,Graple-method}
 \title{Sets the Class key in the grapleObject - can be done retroactively so that student can set their
-class key}
+class key/}
 \usage{
 \S4method{setClassKey}{Graple}(grapleObject, classKey, path)
 }
@@ -20,7 +20,7 @@ The status message is updated on Graple object and the Graple object is returned
 }
 \description{
 Sets the Class key in the grapleObject - can be done retroactively so that student can set their
-class key
+class key/
 }
 \examples{
 \dontrun{
