@@ -610,7 +610,7 @@ setGeneric(name="GrapleRetrieveExperimentsByAPIKey",
 #' GrapleRetrieveExperimentsByClassKey('ClassKeySample', 'AP1K3YSAMPL3', 'GWS url')
 #' }
 setGeneric(name="GrapleRetrieveExperimentsByClassKey",
-           def=function(classKey, url, APIkey)
+           def=function(classKey, APIkey, url)
            {
              standardGeneric("GrapleRetrieveExperimentsByClassKey")
            }
