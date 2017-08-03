@@ -601,15 +601,16 @@ setGeneric(name="GrapleRetrieveExperimentsByAPIKey",
 
 #' Used to retrieve the experiments associated with a given API key.
 #' @param classKey The user's classKey
+#' @param APIkey The user's API key
 #' @param url The GWS url
 #' @return The experiments associated with this API key
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleRetrieveExperimentsByClassKey('AP1K3YSAMPL3', 'GWS url')
+#' GrapleRetrieveExperimentsByClassKey('ClassKeySample', 'AP1K3YSAMPL3', 'GWS url')
 #' }
 setGeneric(name="GrapleRetrieveExperimentsByClassKey",
-           def=function(classKey, url)
+           def=function(classKey, url, APIkey)
            {
              standardGeneric("GrapleRetrieveExperimentsByClassKey")
            }
@@ -1279,14 +1280,15 @@ setMethod(f="GrapleRetrieveExperimentsByAPIKey",
 #' @export
 #' @examples
 #' \dontrun{
-#' GrapleRetrieveExperimentsByClassKey('sampleClassKey', 'GWS url')
+#' GrapleRetrieveExperimentsByClassKey('sampleClassKey', 'SAMPL3AP1K3Y', 'GWS url')
 #' }
 setMethod(f="GrapleRetrieveExperimentsByClassKey",
           signature="character",
-          definition=function(classKey,url)
+          definition=function(classKey,APIkey,url)
           {
             params = list()
             params['classid'] = classKey
+            params['apikey'] = APIkey
             qurl <- paste(url, "GetClassExperiments", sep="/") # fix later
             response = postForm(qurl, .params = params) # files parameter?
             offering = fromJSON(response)
