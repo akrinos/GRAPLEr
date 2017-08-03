@@ -1262,8 +1262,8 @@ setMethod(f="GrapleRetrieveExperimentsByAPIKey",
             response = postForm(qurl, .params = params) # files parameter?
             offering = fromJSON(response)
             print(offering)
-            if (length(offering['errors']) == 0){
-              Experiments = offering['dbdocs'] #offering@APIKey
+            if (ncol(offering) > 2 || length(offering['errors']) == 0){
+              Experiments = offering #offering@APIKey
             } else {
               Experiments = offering['errors']
             }
@@ -1291,8 +1291,8 @@ setMethod(f="GrapleRetrieveExperimentsByClassKey",
             response = postForm(qurl, .params = params) # files parameter?
             offering = fromJSON(response)
             print(offering)
-            if (length(offering['errors']) == 0){
-              Experiments = offering['dbdocs'] #offering@APIKey
+            if (ncol(offering) > 2 || length(offering['errors']) == 0){
+              Experiments = offering #offering@APIKey
             } else {
               Experiments = offering['errors']
             }
